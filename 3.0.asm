@@ -26,9 +26,16 @@ section .text
 
         call scanf wrt ..plt
 
-        ;quick strcpy
-        mov rcx, 1024
+        ;get strlen
+        lea rdi, [input]
+        sub rcx, rcx
+        not rcx
+        sub al, al
+        cld
+        repne scasb
+        not rcx
 
+        ;quick strcpy
         lea rsi, [input]
         lea rdi, [output]
 
