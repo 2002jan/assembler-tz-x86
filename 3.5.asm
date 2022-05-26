@@ -40,6 +40,53 @@ section .text
 
     endScanningWhile:
 
+
+    bubbleSort:
+
+        mov r15, 0
+
+    outerLoop:
+
+        cmp r15, [n]
+
+        jge endOuterLoop
+
+        mov rcx, [n]
+        sub rcx, 1
+
+    innerLoop:
+
+        cmp rcx, r15
+
+        jle endInnerLoop
+
+        lea rsi, [array]
+        lea rsi, [rsi + rcx * 4]
+        lea rdi, [rsi - 4]
+
+        mov eax, dword [rsi]
+
+        cmp dword [rdi], eax
+
+        jle endXCHG
+
+        xchg dword [rdi], eax
+        mov dword [rsi], eax
+
+    endXCHG:
+
+        loop innerLoop
+
+    endInnerLoop:
+
+        inc r15
+
+        cmp r15, [n]
+
+        jl outerLoop
+
+    endOuterLoop: 
+
         lea r15, [array]
         mov r14, 0
         
